@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import { Editor } from "react-draft-wysiwyg";
-import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import CreateEmail from "./mailbox/CreateEmail";
 import Outbox from "./mailbox/Outbox";
 import classes from "./WelcomePage.module.css";

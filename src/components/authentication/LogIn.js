@@ -2,7 +2,6 @@ import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../context/authReducer";
 import apiKey from "../../context/aipKeyStore";
-
 import classes from "./LogIn.module.css";
 import { Redirect, useHistory } from "react-router-dom";
 
@@ -44,6 +43,8 @@ const LogIn = () => {
           alert(data.error.message);
         } else {
           dispatch(authActions.login(data.idToken));
+          dispatch(authActions.setEmail(data.email));
+          dispatch(authActions.setCleanEmail(data.email.replace(/[^a-zA-Z ]/g, "")));
         }
       } catch (err) {
         alert(err.error.message);

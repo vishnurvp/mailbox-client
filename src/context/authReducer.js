@@ -4,6 +4,7 @@ const initialAuthState = {
   isAuthenticated: false,
   idToken: '',
   email: '',
+  cleanEmail: '',
   isEmailVerified: false,
 };
 
@@ -20,6 +21,9 @@ const authSlice = createSlice({
     },
     setEmail(state, action) {
       state.email = action.payload;
+    },
+    setCleanEmail(state, action) {
+      state.cleanEmail = action.payload;
     },
     setIsEmailVerified(state, action) {
       state.isEmailVerified = action.payload;

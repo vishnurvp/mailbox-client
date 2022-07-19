@@ -1,13 +1,18 @@
+import React, { Fragment, useRef, useState } from "react";
+
 import { convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import React, { Fragment, useRef, useState } from "react";
+import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from "draftjs-to-html";
+import { useSelector } from "react-redux";
 
 const CreateEmail = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const toEmailInp = useRef();
   const emailHeadingInp = useRef();
   // const emailBodyInp = useRef();
+  const userEmail = useSelector(state=>state.auth.email);
+  const cleanUserEmail = useSelector(state=>state.auth.cleanEmail);
 
   const onEditorStateChange = (currEditorState) => {
     setEditorState(currEditorState);
@@ -15,12 +20,13 @@ const CreateEmail = () => {
 
   const sendMailHandler = () => {
     const emailData = {
+      from: userEmail,
       to: toEmailInp.current.value,
       heading: emailHeadingInp.current.value,
       body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     };
 
-    fetch("https://mailboxclient-default-rtdb.firebaseio.com/emails.json", {
+    fetch(`https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/emails.json`, {
       method: "POST",
       headers: {
         "Content-type": "application-json",
@@ -29,7 +35,7 @@ const CreateEmail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
 
     // console.log(emailData);
