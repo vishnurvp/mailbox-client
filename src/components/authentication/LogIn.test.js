@@ -4,47 +4,64 @@ import LogIn from "./LogIn";
 import store from "../../context/indexReducer";
 
 describe("LogIn component", () => {
-  test("renders login test", () => {
+  test("renders login text", () => {
     // Arrange
     render(
       <Provider store={store}>
         <LogIn />
       </Provider>
     );
-    // Act
-    // ... nothing
-
     // Assert
-    const helloWorldElement = screen.getByText("Log In");
-    expect(helloWorldElement).toBeInTheDocument();
+    const loginbtnele = screen.getByText("Log In");
+    expect(loginbtnele).toBeInTheDocument();
   });
 
-  test("renders sign up test", () => {
+  test("renders email text", () => {
     // Arrange
     render(
       <Provider store={store}>
         <LogIn />
       </Provider>
     );
-    // Act
-    // ... nothing
-
     // Assert
-    const helloWorldElement = screen.getByText("Email");
-    expect(helloWorldElement).toBeInTheDocument();
+    const emailLabelEle = screen.getByText("Email");
+    expect(emailLabelEle).toBeInTheDocument();
   });
-  test("renders sign up test", () => {
+
+  test("renders password text", () => {
     // Arrange
     render(
       <Provider store={store}>
         <LogIn />
       </Provider>
     );
-    // Act
-    // ... nothing
-
     // Assert
-    const helloWorldElement = screen.getByText("Password");
-    expect(helloWorldElement).toBeInTheDocument();
+    const passwordLabelEle = screen.getByText("Password");
+    expect(passwordLabelEle).toBeInTheDocument();
+  });
+
+  test("renders forgot password text", () => {
+    // Arrange
+    render(
+      <Provider store={store}>
+        <LogIn />
+      </Provider>
+    );
+    // Assert
+    const forgotPasswordEle = screen.getByText("Forgot Password?");
+    expect(forgotPasswordEle).toBeInTheDocument();
+  });
+
+  test("renders click hear to signup text", () => {
+    // Arrange
+    render(
+      <Provider store={store}>
+        <LogIn />
+      </Provider>
+    );
+    // Assert
+    const clickHearToSignupEle = screen.getByText("Click heare to Sign Up", {exact:false});
+    expect(clickHearToSignupEle).toBeInTheDocument();
   });
 });
+
