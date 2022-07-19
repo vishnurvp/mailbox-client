@@ -14,7 +14,7 @@ const Outbox = (props) => {
     <Fragment>
       <div>This is outbox</div>
       {Object.keys(emails).map(item=><p style={{border: '2px solid black'}} key={item}>
-        <label>To: {emails[item].to}</label><br/>
+        <label >To: {emails[item].to}</label><br/>
         <label>Heading: {emails[item].heading}</label><br/>
         <label>{emails[item].body}</label>
       </p>)}
