@@ -43,7 +43,7 @@ const SignUp = (props) => {
         if (response.ok) {
           alert(`Signup Successfull \nYour Email: ${data.email}`);
           setIsSignupSuccessfull({ state: true, err: "" });
-          // history.push('/login');
+          history.replace('/login');
         } else {
           throw new Error(data.error.message);
         }
@@ -82,7 +82,6 @@ const SignUp = (props) => {
           </button>
         )}
         {isSignupSuccessfull.state ? <p>signup Successfull</p> : <p>{`${isSignupSuccessfull.err}`}</p>}
-
         <br />
       </form>
     </Fragment>
