@@ -7,7 +7,7 @@ const Outbox = (props) => {
 
   useEffect(() => {
     fetch(
-      `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/emails.json`
+      `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/sentemails.json`
     )
       .then((res) => res.json())
       .then((data) => {

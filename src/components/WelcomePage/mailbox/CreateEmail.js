@@ -26,7 +26,7 @@ const CreateEmail = () => {
       body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
     };
 
-    fetch(`https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/emails.json`, {
+    fetch(`https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/sentemails.json`, {
       method: "POST",
       headers: {
         "Content-type": "application-json",
