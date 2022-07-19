@@ -1,10 +1,15 @@
 import React, { Fragment, useState } from "react";
 import classes from "./SignUp.module.css";
-import apiKey from '../../context/aipKeyStore';
+import apiKey from "../../context/aipKeyStore";
 import { useHistory } from "react-router-dom";
 
 const SignUp = (props) => {
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isSignupSuccessfull, setIsSignupSuccessfull] = useState({
+    state: false,
+    err: "",
+  });
+
   const history = useHistory();
 
   const signuphandler = async (event) => {
@@ -14,6 +19,7 @@ const SignUp = (props) => {
     const password1 = event.target.elements["password1"].value;
     const password2 = event.target.elements["password2"].value;
     if (password1 === "" || password1.length < 8 || password1 !== password2) {
+// if (false){
       alert(
         `Password cannot be empty \nPassword should be atleast 8 charecters long \nBoth Passwords should match`
       );
@@ -32,16 +38,18 @@ const SignUp = (props) => {
               "Content-Type": "application/json",
             },
           }
-        )
+        );
         const data = await response.json();
         if (response.ok) {
           alert(`Signup Successfull \nYour Email: ${data.email}`);
-          history.push('/login');
+          setIsSignupSuccessfull({ state: true, err: "" });
+          // history.push('/login');
         } else {
           throw new Error(data.error.message);
         }
-      } catch (err) {
-        alert(err);
+      } catch (error) {
+        setIsSignupSuccessfull({ state: false, err: error });
+        // alert(error);
       }
       //   console.log(email, password1, password2);
       event.target.elements["email"].value = "";
@@ -66,9 +74,15 @@ const SignUp = (props) => {
         <br />
         <input id="password2" type="password"></input>
         <br />
-        {isSigningUp? <p>Signing Up ...</p> :<button id="signUpBtn" type="submit">
-          Sign Up
-        </button>}
+        {isSigningUp ? (
+          <p>Signing Up ...</p>
+        ) : (
+          <button id="signUpBtn" type="submit">
+            Sign Up
+          </button>
+        )}
+        {isSignupSuccessfull.state ? <p>signup Successfull</p> : <p>{`${isSignupSuccessfull.err}`}</p>}
+
         <br />
       </form>
     </Fragment>
