@@ -18,7 +18,7 @@ const Outbox = (props) => {
   const emailListJSX = emails ? (
     <ul>
       {Object.keys(emails).map((item) => (
-        <p style={{ border: "2px solid black", textAlign: 'left' }} key={item}>
+        <li style={{ border: "2px solid black", textAlign: 'left' }} key={item}>
           <label style={{textAlign: 'left'}}>To: {emails[item].to}</label>
           <hr />
           <label>Heading: {emails[item].heading}</label>
@@ -26,7 +26,7 @@ const Outbox = (props) => {
           <p
             dangerouslySetInnerHTML={{ __html: emails[item].body }}
           ></p>
-        </p>
+        </li>
       ))}
     </ul>
   ) : (
