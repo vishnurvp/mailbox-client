@@ -18,6 +18,10 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.isAuthenticated = false;
+      state.idToken = '';
+      state.email = '';
+      state.cleanEmail = '';
+      state.isEmailVerified = '';
     },
     setEmail(state, action) {
       state.email = action.payload;

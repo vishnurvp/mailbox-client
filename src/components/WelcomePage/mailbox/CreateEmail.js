@@ -24,6 +24,7 @@ const CreateEmail = () => {
       to: toEmailInp.current.value,
       heading: emailHeadingInp.current.value,
       body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+      isRead: false,
     };
     const cleanToEmail = toEmailInp.current.value.replace(/[^a-zA-Z ]/g, "");
     fetch(`https://mailboxclient-default-rtdb.firebaseio.com/${cleanToEmail}/inbox.json`,{
