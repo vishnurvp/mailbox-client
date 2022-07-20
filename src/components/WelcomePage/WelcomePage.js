@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CreateEmail from "./mailbox/CreateEmail";
+import Inbox from "./mailbox/Inbox";
 import Outbox from "./mailbox/Outbox";
 import classes from "./WelcomePage.module.css";
 
@@ -38,7 +39,7 @@ const WelcomePage = () => {
 
       <div className={classes.mailBox}>
         {createMailOpen && <CreateEmail />}
-        {inboxOpen && <div>This is Inbox</div>}
+        {inboxOpen && <Inbox/>}
         {outboxOpen && <Outbox />}
       </div>
     </div>
