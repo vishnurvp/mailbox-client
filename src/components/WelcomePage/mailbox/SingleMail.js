@@ -19,6 +19,29 @@ const SingleMail = (props) => {
     );
   }, [cleanUserEmail, endpoint]);
 
+  const deleteClickHandler = () => {
+    fetch(
+      `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox/${endpoint}.json`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    ).then(res=>{
+      if(res.ok) {
+        fetch(
+          `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox.json`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            props.onDelete(data);
+          });
+      }
+    });
+    
+  };
+
   return (
     <div>
       <button onClick={props.onClose}>Close</button>
@@ -27,6 +50,7 @@ const SingleMail = (props) => {
       <h3>{props.data.email.heading}</h3>
       <hr />
       <div dangerouslySetInnerHTML={{ __html: props.data.email.body }} />
+      <button onClick={deleteClickHandler}>Delete This Email!</button>
     </div>
   );
 };

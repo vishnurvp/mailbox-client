@@ -5,8 +5,9 @@ import SingleMail from "./SingleMail";
 const Inbox = () => {
   const [emails, setEmails] = useState({});
   const [singleMail, setSingleMail] = useState('');
-  const [isread, setIsread] = useState(false);
+  // const [viewed, setViewed] = useState('');
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
+
 
   useEffect(() => {
     fetch(
@@ -20,19 +21,19 @@ const Inbox = () => {
 
   const openEmailClickHandler = (event) => {
     setSingleMail({email: emails[event.currentTarget.id], ID: event.currentTarget.id});
-    setIsread(true);
   };
 
   const emailListJSX = emails ? (
     <ul>
       {Object.keys(emails).map((item) => (
-        <li
+        <li 
           id={item}
           onClick={openEmailClickHandler}
           style={{
             border: "2px solid black",
             textAlign: "left",
-            listStyle: isread?'none' : emails[item].isRead?'none':'',
+            listStyle: emails[item].isRead?'none':'',
+            // liststyle: viewed,
           }}
           key={item}
         >
@@ -54,13 +55,19 @@ const Inbox = () => {
 
   const onSingleMailCloseHandler = () => {
     setSingleMail('');
+    // setViewed('none');
+  }
+
+  const onSingleMailDeleteHandler = (data) => {
+    setEmails(data);
+    setSingleMail('');
   }
 
   return (
     <Fragment>
       <h3>This is Inbox</h3>
       {!singleMail && emailListJSX}
-      {singleMail && <SingleMail onClose={onSingleMailCloseHandler} data={singleMail} />}
+      {singleMail && <SingleMail onDelete={onSingleMailDeleteHandler} onClose={onSingleMailCloseHandler} data={singleMail} />}
     </Fragment>
   );
 };
