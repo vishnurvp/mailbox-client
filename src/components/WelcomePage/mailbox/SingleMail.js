@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { mailActions } from "../../../context/mailReducer";
 
 const SingleMail = (props) => {
+  const dispatch = useDispatch();
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
   const endpoint = props.data.ID;
   useEffect(() => {
@@ -16,8 +18,18 @@ const SingleMail = (props) => {
           isRead: true,
         }),
       }
-    );
-  }, [cleanUserEmail, endpoint]);
+    ).then((res) => {
+      if (res.ok) {
+        fetch(
+          `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox.json`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            dispatch(mailActions.setInbox(data));
+          });
+      }
+    });
+  }, [cleanUserEmail, endpoint, dispatch]);
 
   const deleteClickHandler = () => {
     fetch(
@@ -28,8 +40,8 @@ const SingleMail = (props) => {
           "Content-type": "application/json",
         },
       }
-    ).then(res=>{
-      if(res.ok) {
+    ).then((res) => {
+      if (res.ok) {
         fetch(
           `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox.json`
         )
@@ -39,7 +51,6 @@ const SingleMail = (props) => {
           });
       }
     });
-    
   };
 
   return (

@@ -77,6 +77,7 @@ const LogIn = () => {
           <br />
           <input id="password" type="password"></input>
           <br />
+          <br/>
           <button id="logInBtn" type="submit">
             Log In
           </button>

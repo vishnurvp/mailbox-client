@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { authActions } from "../../context/authReducer";
 import CreateEmail from "./mailbox/CreateEmail";
 import Inbox from "./mailbox/Inbox";
@@ -8,8 +8,8 @@ import Outbox from "./mailbox/Outbox";
 import classes from "./WelcomePage.module.css";
 
 const WelcomePage = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const Authenticated = useSelector(state=>state.auth.isAuthenticated);
   const userEmail = useSelector(state=>state.auth.email);
   const [createMailOpen, setCreateMailOpen] = useState(false);
   const [inboxOpen, setInboxOpen] = useState(true);
@@ -34,13 +34,13 @@ const WelcomePage = () => {
 
   const logoutClickHandler = () => {
     dispatch(authActions.logout());
+    history.replace('/login');
   };
 
   return (
     <div>
       <div>
         <h1>Welcome To your Mail Box</h1>
-        {!Authenticated && <Redirect to={'/login'}/>}
         <span>{userEmail}</span>
         <button onClick={logoutClickHandler}>Log Out</button>
       </div>

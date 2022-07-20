@@ -45,7 +45,12 @@ describe("signup component", () => {
     expect(confirmPasswordEle).toBeInTheDocument();
   });
 
-  test("renders signing up... after signup click", () => {
+  test("does not renders signing up... after signup click without credentials", () => {
+
+    window.fetch = jest.fn();
+    window.fetch.mockResolvedValueOnce({
+        json: async () => {{}},
+    })
     // Arrange
     render(
       <Provider store={store}>
@@ -54,20 +59,22 @@ describe("signup component", () => {
     );
 
     // Act
-    const signupEle = screen.getByRole('button');
+    
+    const signupEle = screen.getByText('sign up', {exact:false});
     userEvent.click(signupEle);
 
     // Assert
-    const signiguplabel = screen.getByText("Signing Up ...");
-    expect(signiguplabel).toBeInTheDocument();
+    const signiguplabel = screen.queryByText('signing up....')
+    expect(signiguplabel).not.toBeInTheDocument();
   });
 });
 
 // describe('Sign up Async Component', ()=>{
 //   test("renders Email_Exists if sign up fails", async () => {
+//     const data = {error: {message: 'Email_Exists'}};
 //     window.fetch = jest.fn();
 //     window.fetch.mockResolvedValueOnce({
-//       json: async()=>{return {error:{message:'Email_Exists'}}},
+//       json: async()=>data,
 //     })
 //     render(
 //       <Provider store={store}>
