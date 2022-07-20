@@ -5,6 +5,7 @@ import SingleMail from "./SingleMail";
 const Inbox = () => {
   const [emails, setEmails] = useState({});
   const [singleMail, setSingleMail] = useState('');
+  const [isread, setIsread] = useState(false);
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const Inbox = () => {
 
   const openEmailClickHandler = (event) => {
     setSingleMail({email: emails[event.currentTarget.id], ID: event.currentTarget.id});
+    setIsread(true);
   };
 
   const emailListJSX = emails ? (
@@ -30,7 +32,7 @@ const Inbox = () => {
           style={{
             border: "2px solid black",
             textAlign: "left",
-            listStyle: emails[item].isRead?'none':'',
+            listStyle: isread?'none' : emails[item].isRead?'none':'',
           }}
           key={item}
         >

@@ -10,6 +10,7 @@ import classes from "./WelcomePage.module.css";
 const WelcomePage = () => {
   const dispatch = useDispatch();
   const Authenticated = useSelector(state=>state.auth.isAuthenticated);
+  const userEmail = useSelector(state=>state.auth.email);
   const [createMailOpen, setCreateMailOpen] = useState(false);
   const [inboxOpen, setInboxOpen] = useState(true);
   const [outboxOpen, setOutboxOpen] = useState(false);
@@ -40,6 +41,7 @@ const WelcomePage = () => {
       <div>
         <h1>Welcome To your Mail Box</h1>
         {!Authenticated && <Redirect to={'/login'}/>}
+        <span>{userEmail}</span>
         <button onClick={logoutClickHandler}>Log Out</button>
       </div>
       <br/>
