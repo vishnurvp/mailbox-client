@@ -1,8 +1,9 @@
 .mailBox {
-    width: 80vw;
+    width: 70vw;
     height: 50vw;
     background-color: beige;
     overflow: scroll;
+    float: left;
 }
 .sideNav {
     width: 20vw;

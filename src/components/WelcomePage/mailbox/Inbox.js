@@ -1,14 +1,21 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SingleMail from "./SingleMail";
-import { mailActions } from '../../../context/mailReducer';
+import { mailActions } from "../../../context/mailReducer";
 
-const Inbox = () => {
+const Inbox = (props) => {
   const dispatch = useDispatch();
   const [singleMail, setSingleMail] = useState("");
-  const emails =  useSelector(state=>state.mail.inbox);
+  const emails = useSelector((state) => state.mail.inbox);
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
-
+  if (emails) {
+    props.setUnread(Object.keys(emails).reduce((p,key)=>{
+      if(emails[key].isRead) return p+1;
+      return p;
+    },0)-1)
+  }
+  
+  // if(emails) props.setUnread()
   useEffect(() => {
     fetch(
       `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox.json`
@@ -17,6 +24,19 @@ const Inbox = () => {
       .then((data) => {
         dispatch(mailActions.setInbox(data));
       });
+  }, [cleanUserEmail, dispatch]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetch(
+        `https://mailboxclient-default-rtdb.firebaseio.com/${cleanUserEmail}/inbox.json`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch(mailActions.setInbox(data));
+        });
+    }, 6000);
+    return () => clearInterval(interval);
   }, [cleanUserEmail, dispatch]);
 
   const openEmailClickHandler = (event) => {
@@ -35,7 +55,7 @@ const Inbox = () => {
           style={{
             border: "2px solid black",
             textAlign: "left",
-            listStyle: emails[item].isRead?'none':'',
+            listStyle: emails[item].isRead ? "none" : "",
           }}
           key={item}
         >

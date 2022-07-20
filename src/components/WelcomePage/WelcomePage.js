@@ -14,6 +14,7 @@ const WelcomePage = () => {
   const [createMailOpen, setCreateMailOpen] = useState(false);
   const [inboxOpen, setInboxOpen] = useState(true);
   const [outboxOpen, setOutboxOpen] = useState(false);
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
   const createMailClickHandler = () => {
     setInboxOpen(false);
@@ -37,6 +38,10 @@ const WelcomePage = () => {
     history.replace('/login');
   };
 
+  const setUnreadHandler = (data) => {
+    setUnreadMessages(data);  
+  }
+
   return (
     <div>
       <div>
@@ -50,12 +55,13 @@ const WelcomePage = () => {
           <button onClick={createMailClickHandler}>Create Email</button>
           <br />
           <button onClick={inboxClickHandler}>In Box</button>
+          <span>{unreadMessages}</span>
           <br />
           <button onClick={outboxClickHandler}>Out Box</button>
         </div>
         <div className={classes.mailBox}>
           {createMailOpen && <CreateEmail />}
-          {inboxOpen && <Inbox />}
+          {inboxOpen && <Inbox setUnread={setUnreadHandler}/>}
           {outboxOpen && <Outbox />}
         </div>
       </div>
