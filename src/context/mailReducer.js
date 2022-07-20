@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialMailState = {
   inbox: {},
-  sentMail: {},
+  sentmail: {},
 };
 
 const mailSlice = createSlice({
@@ -13,7 +13,7 @@ const mailSlice = createSlice({
       state.inbox = action.payload;
     },
     setSentMail(state, action) {
-      state.sentMail = action.payload;
+      state.sentmail = action.payload;
     },
   },
 });
