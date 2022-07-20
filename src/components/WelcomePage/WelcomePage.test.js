@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import WelcomePage from "./WelcomePage";
 import store from '../../context/indexReducer';
+import userEvent from "@testing-library/user-event";
 
 describe("welcome page component", () => {
   test("renders Welcome To your Mail Box field", () => {
@@ -51,6 +52,24 @@ describe("welcome page component", () => {
     const outboxTextNode = screen.getByText("Out Box", {exact: false});
     expect(outboxTextNode).toBeInTheDocument();
   });
+  
+
+  test("renders this is inbox when inbox is clicked", () => {
+    // Arrange
+    render(
+      <Provider store={store}>
+        <WelcomePage/>
+      </Provider>
+    );
+
+    const inboxBtn = screen.getByText('In Box');
+    userEvent.click(inboxBtn);
+
+    // Assert
+    const inboxclicklabel = screen.getByText("this is inbox", {exact: false});
+    expect(inboxclicklabel).toBeInTheDocument();
+  });
+
   
 });
 
