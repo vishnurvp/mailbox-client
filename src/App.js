@@ -9,7 +9,7 @@ import WelcomePage from "./components/WelcomePage/WelcomePage";
 function App() {
   return (
     <div className="App">
-      <h1>Mail Box Client App</h1>
+      <h1 className={'App-header'}>Mail Box Client</h1>
       <Redirect to={"/login"} />
       <Switch>
         <Route path={"/login"} exact>

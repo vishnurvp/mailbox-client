@@ -70,18 +70,12 @@ const LogIn = () => {
       <Fragment>
         <form className={classes.form} onSubmit={loginHandler}>
           <label htmlFor="email">Email</label>
-          <br />
           <input id="logInEmail" type="email"></input>
-          <br />
           <label htmlFor="password">Password</label>
-          <br />
           <input id="password" type="password"></input>
-          <br />
-          <br/>
           <button id="logInBtn" type="submit">
             Log In
           </button>
-          <br />
         </form>
         <p onClick={signUpClickHandler} style={{ textDecoration: "underline" }}>
           Don't have an account?
