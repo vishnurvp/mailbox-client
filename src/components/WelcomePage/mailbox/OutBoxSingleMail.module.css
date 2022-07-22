@@ -1,0 +1,11 @@
+.sigleMailDiv{
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: rgb(255, 239, 200);
+    text-align: left;
+    padding: 5px;
+}
+
+.sigleMailDiv h3 {
+    border-bottom: 1px solid black;
+}

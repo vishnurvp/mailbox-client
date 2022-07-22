@@ -1,9 +1,14 @@
 .mailBox {
+    box-sizing: border-box;
     width: 70vw;
-    height: 50vw;
-    background-color: beige;
-    overflow: scroll;
+    height: 60vh;
+    background-color: rgb(162, 65, 0);
+    overflow: auto;
     float: left;
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 5px;
+    border: 2px solid black;
 }
 .sideNav {
     width: 20vw;

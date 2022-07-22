@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mailActions } from "../../../context/mailReducer";
 import OutBoxSingleMail from "./OutBoxSingleMail";
+import classes from './Outbox.module.css';
 
 const Outbox = (props) => {
   const dispatch = useDispatch();
@@ -27,22 +28,17 @@ const Outbox = (props) => {
   };
 
   const emailListJSX = emails ? (
-    <ul>
-      {Object.keys(emails).map((item) => (
-        <li
+    <ul className={classes.emailsList}>
+      {Object.keys(emails).reverse().map((item) => (
+        <li 
           id={item}
           onClick={openEmailClickHandler}
-          style={{
-            border: "2px solid black",
-            textAlign: "left",
-            listStyle: "none",
-          }}
           key={item}
         >
-          <span style={{ paddingRight: "10px", textAlign: "left" }}>
-            To: {emails[item].to}{" "}
+          <span >
+            {emails[item].to}:
           </span>
-          <span>Heading: {emails[item].heading}</span>
+          <span>{emails[item].heading}</span>
         </li>
       ))}
     </ul>
@@ -61,7 +57,7 @@ const Outbox = (props) => {
 
   return (
     <Fragment>
-      <h4>This is outbox</h4>
+      <h4 className={classes.inboxHeading}>This is outbox</h4>
       {!outSingleMail && emailListJSX}
       {outSingleMail && <OutBoxSingleMail
         onDelete={onSingleMailDeleteHandler}

@@ -1,5 +1,5 @@
 import React, { Fragment, useRef, useState } from "react";
-
+import classes from './CreateEmail.module.css';
 import { convertToRaw, EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -15,7 +15,7 @@ const CreateEmail = () => {
   const cleanUserEmail = useSelector(state=>state.auth.cleanEmail);
 
   const onEditorStateChange = (currEditorState) => {
-    setEditorState(currEditorState);
+    setEditorState(currEditorState)
   };
 
   const sendMailHandler = () => {
@@ -58,17 +58,10 @@ const CreateEmail = () => {
   };
   return (
     <Fragment>
-      <label>To: </label>
-      <input type={"email"} ref={toEmailInp}></input>
-      <br />
-      <label>Heading: </label>
-      <input ref={emailHeadingInp}></input>
+      <input className={classes.to} placeholder="To" type={"email"} ref={toEmailInp}></input>
+      <input className={classes.mailHeading} placeholder="Email Heading" ref={emailHeadingInp}></input>
       <div
-        style={{
-          overflow: "scroll",
-          backgroundColor: "#abbedb",
-          height: "40vw",
-        }}
+        className={classes.editorDiv}
       >
         <Editor
           editorState={editorState}
@@ -77,9 +70,8 @@ const CreateEmail = () => {
           editorClassName="editorClassName"
           onEditorStateChange={onEditorStateChange}
         />
-        {/* <textarea ref={emailBodyInp}></textarea> */}
       </div>
-      <button onClick={sendMailHandler}>Send Mail</button>
+      <button className={classes.sendMailBtn} onClick={sendMailHandler}>Send Mail</button>
     </Fragment>
   );
 };

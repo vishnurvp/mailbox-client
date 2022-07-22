@@ -1,0 +1,25 @@
+.editorDiv {
+  background-color: rgb(253, 224, 191);
+  padding: 3px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.to {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.mailHeading {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.sendMailBtn {
+  font-size: 20px;
+  margin-top: 5px;
+}

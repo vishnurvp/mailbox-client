@@ -1,0 +1,25 @@
+.emailsList {
+  box-sizing: border-box;
+  background-color: rgb(251, 239, 222);
+  border-radius: 5px;
+  padding: 5px;
+}
+.emailsList li {
+  list-style: none;
+  font-size: 15px;
+  box-sizing: border-box;
+  background-color: bisque;
+  padding: 3px;
+  text-align: left;
+  border: 1px solid #ffab44;
+  margin-bottom: 2px;
+}
+.emailsList span {
+  padding-right: 10px;
+}
+
+.inboxHeading {
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgb(254, 249, 242);
+}

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SingleMail from "./SingleMail";
 import { mailActions } from "../../../context/mailReducer";
+import classes from './Inbox.module.css';
 
 const Inbox = (props) => {
   const dispatch = useDispatch();
@@ -10,9 +11,9 @@ const Inbox = (props) => {
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
   if (emails) {
     props.setUnread(Object.keys(emails).reduce((p,key)=>{
-      if(emails[key].isRead) return p+1;
+      if(!emails[key].isRead) return p+1;
       return p;
-    },0)-1)
+    },0))
   }
   
   // if(emails) props.setUnread()
@@ -35,7 +36,7 @@ const Inbox = (props) => {
         .then((data) => {
           dispatch(mailActions.setInbox(data));
         });
-    }, 6000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [cleanUserEmail, dispatch]);
 
@@ -47,23 +48,21 @@ const Inbox = (props) => {
   };
 
   const emailListJSX = emails ? (
-    <ul>
-      {Object.keys(emails).map((item) => (
+    <ul className={classes.emailsList}>
+      {Object.keys(emails).reverse().map((item) => (
         <li
           id={item}
           onClick={openEmailClickHandler}
           style={{
-            border: "2px solid black",
-            textAlign: "left",
-            listStyle: emails[item].isRead ? "none" : "",
+            backgroundColor: emails[item].isRead ?'white':'#ffab44',
           }}
           key={item}
         >
-          {/* {<div style={{width: '10px', height:'10px', borderRadius: '50%', backgroundColor: 'red'}}/>} */}
-          <span style={{ paddingRight: "10px", textAlign: "left" }}>
-            From: {emails[item].from}
+          {!emails[item].isRead && <div style={{width: '10px', height:'10px', borderRadius: '50%', backgroundColor: 'red'}}/>}
+          <span>
+            {emails[item].from}:
           </span>
-          <span>Heading: {emails[item].heading}</span>
+          <span>{emails[item].heading}</span>
         </li>
       ))}
     </ul>
@@ -82,7 +81,7 @@ const Inbox = (props) => {
 
   return (
     <Fragment>
-      <h3>This is Inbox</h3>
+      <h3 className={classes.inboxHeading}>This is Inbox</h3>
       {!singleMail && emailListJSX}
       {singleMail && (
         <SingleMail

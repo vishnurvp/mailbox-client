@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mailActions } from "../../../context/mailReducer";
+import classes from './SingleMail.module.css';
 
 const SingleMail = (props) => {
   const dispatch = useDispatch();
@@ -54,12 +55,10 @@ const SingleMail = (props) => {
   };
 
   return (
-    <div>
+    <div className={classes.sigleMailDiv}>
       <button onClick={props.onClose}>Close</button>
       <h3>{props.data.email.from}</h3>
-      <hr />
       <h3>{props.data.email.heading}</h3>
-      <hr />
       <div dangerouslySetInnerHTML={{ __html: props.data.email.body }} />
       <button onClick={deleteClickHandler}>Delete This Email!</button>
     </div>

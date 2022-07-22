@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import classes from './OutBoxSingleMail.module.css';
 
 const OutBoxSingleMail = (props) => {
   const cleanUserEmail = useSelector((state) => state.auth.cleanEmail);
@@ -28,12 +29,10 @@ const OutBoxSingleMail = (props) => {
   };
 
   return (
-    <div>
+    <div className={classes.sigleMailDiv}>
       <button onClick={props.onClose}>Close</button>
       <h3>{props.data.email.to}</h3>
-      <hr />
       <h3>{props.data.email.heading}</h3>
-      <hr />
       <div dangerouslySetInnerHTML={{ __html: props.data.email.body }} />
       <button onClick={deleteClickHandler}>Delete This Email!</button>
     </div>
