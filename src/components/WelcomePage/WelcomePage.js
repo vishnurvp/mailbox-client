@@ -55,7 +55,7 @@ const WelcomePage = () => {
           <button onClick={createMailClickHandler}>Create Email</button>
           <br />
           <button onClick={inboxClickHandler}>In Box</button>
-          <span>{unreadMessages}</span>
+          {unreadMessages ? <span>Unread: {unreadMessages}</span> : ''}
           <br />
           <button onClick={outboxClickHandler}>Out Box</button>
         </div>
