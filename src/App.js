@@ -28,7 +28,7 @@ function App() {
           <Redirect to={"/login"} />
         </Route>
       </Switch>
-    </div>
+    </div> 
   );
 }
 
